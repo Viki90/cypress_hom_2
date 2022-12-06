@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import { faker } from "@faker-js/faker";
+import { registerPage } from "../page_objects/registerPOM";
 
 describe("registration test", () => {
   let randomUser = {
@@ -10,21 +11,15 @@ describe("registration test", () => {
     randomPassword: faker.internet.password()
   }
 
-  beforeEach("visit gallery app", () => {
+  before("visit gallery app", () => {
     cy.visit("/");
-    cy.get("a[href='/register']").click();
+    registerPage.registerButton.click();
   });
 
  
 
-  it("register without password confirmation", () => {
-    cy.get("#first-name").type("Viki");
-    cy.get("#last-name").type("Developer");
-    cy.get("#email").type("viki33333333333333@gmail.com");
-    cy.get("#password").type("12341234");
-    cy.get("#password-confirmation").type("12341234");
-    cy.get("input[type='checkbox']").check();
-    cy.get("button").click();
+  it("register with valid data", () => {
+    registerPage.register("Viki", "Developer", "vff@gmail.com", "12341234", "12341234");
     cy.url().should("not.include", "/register");
   });
 
