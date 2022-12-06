@@ -19,7 +19,7 @@ describe("registration test", () => {
  
 
   it("register with valid data", () => {
-    registerPage.register("Viki", "Developer", "vff@gmail.com", "12341234", "12341234");
+    registerPage.register(randomUser.randomFirstName, randomUser.randomLastName, randomUser.randomEmail, randomUser.randomPassword, randomUser.randomPassword);
     cy.url().should("not.include", "/register");
   });
 
