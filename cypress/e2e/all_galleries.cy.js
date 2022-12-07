@@ -1,18 +1,18 @@
 /// <reference types="Cypress" />
 
-import { faker } from "@faker-js/faker";
 import { allGalleriesPage } from "../page_objects/allGalleriesPOM";
 
 describe("all galleries test", () => {
 
   before("visit gallery app", () => {
     cy.visit("/");
-  });
+  }); 
 
- 
-
-  it("all galeries", () => {
-    
+  it("search functionality", () => {
+    allGalleriesPage.searchInput.type("bebe 3");
+    allGalleriesPage.filtterButton.click();
+    allGalleriesPage.allElements.should('have.length', 10);
+    allGalleriesPage.clickOnElement.click();
   });
 
 });
